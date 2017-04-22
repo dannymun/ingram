@@ -1,24 +1,16 @@
 {
-  "name": "ingram",
-  "version": "0.1.0",
-  "description": "COmparte tus fotos con tus compañeros",
-  "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dannymun/ingram.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dannymun/ingram/issues"
-  },
-  "homepage": "https://github.com/dannymun/ingram#readme",
-  "dependencies": {
-    "express": "^4.15.2",
-    "materialize-css": "^0.98.2"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0"
-  }
+    "name": "platzigram",
+    "version": "1.0.0",
+    "description": "comparte tus fotos con toddos los compañeros",
+    "main": "server.js",
+    "author": "",
+    "dependencies": {
+        "express": "^4.15.2",
+        "materialize-css": "^0.98.2",
+    },
+    "devDependencies": {
+        "gulp": "^3.9.1",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^3.1.0",
+    }
 }
