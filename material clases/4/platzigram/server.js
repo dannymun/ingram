@@ -4,9 +4,14 @@ var express = require('express');
 // var app (puede ser cualquier nombre) es igual a express convertida en function
 var app = express();
 
+
+app.set('view engine', 'pug')
+
+
+
 // app get ejecuta la ruta req = require Y res = response se usa res.send para enviar un mensaje
 app.get('/', function(req, res) {
-    res.send('index.html');
+    res.render('index');
 })
 
 // app listen tiene por parametro el puerto (3000) luego la function pasa parametro err

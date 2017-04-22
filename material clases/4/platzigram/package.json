@@ -1,16 +1,17 @@
 {
-    "name": "platzigram",
-    "version": "1.0.0",
-    "description": "comparte tus fotos con toddos los compañeros",
-    "main": "server.js",
-    "author": "",
-    "dependencies": {
-        "express": "^4.15.2",
-        "materialize-css": "^0.98.2",
-    },
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "gulp-rename": "^1.2.2",
-        "gulp-sass": "^3.1.0",
-    }
+  "name": "platzigram",
+  "version": "0.1.0",
+  "description": "comparte tus fotos con toddos los compañeros",
+  "main": "server.js",
+  "author": "danny",
+  "dependencies": {
+    "express": "^4.15.2",
+    "materialize-css": "^0.98.2",
+    "pug": "^2.0.0-beta.12"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0"
+  }
 }
