@@ -6,7 +6,7 @@ var app = express();
 
 // app get ejecuta la ruta req = require Y res = response se usa res.send para enviar un mensaje
 app.get('/', function(req, res) {
-    res.send('Hola Mundo');
+    res.send('index.html');
 })
 
 // app listen tiene por parametro el puerto (3000) luego la function pasa parametro err
