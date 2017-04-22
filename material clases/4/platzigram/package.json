@@ -1,16 +1,16 @@
 {
-  "name": "platzigram",
-  "version": "0.1.0",
-  "description": "Comparte tus fotos estudiando en Platzi con el resto de la comunidad",
-  "main": "server.js",
-  "keywords": [
-    "platzi",
-    "javascript",
-    "curso-definitivo",
-    "platzigram"
-  ],
-  "author": "platzi",
-  "dependencies": {
-    "express": "^4.13.4"
-  }
+    "name": "ingram",
+    "version": "0.1.0",
+    "description": "COmparte tus fotos con tus compañeros",
+    "main": "server.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dannymun/ingram.git"
+    },
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/dannymun/ingram/issues"
+    },
+    "homepage": "https://github.com/dannymun/ingram#readme"
 }
