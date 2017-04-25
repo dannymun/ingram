@@ -4,6 +4,9 @@
 var gulp = require('gulp')
 var sass = require('gulp-sass')
 var rename = require('gulp-rename')
+var babel = require('babelify')
+var browserify = require('browserify')
+var source = require('vinyl-source-stream')
 
 // debo indicar con gulp.task la tarea con el parametro ('nombre de la tarea', function() o array ) y usar gulp y sus ordenes .pipe
 gulp.task('styles', function() {
@@ -20,4 +23,14 @@ gulp.task('assets', function() {
         .pipe(gulp.dest('public'));
 })
 
-gulp.task('default', ['styles', 'assets'])
+gulp.task('scripts', function() {
+    browserify('./src/index.js')
+        .transform(babel)
+        .bundle()
+        .pipe(source('index.js'))
+        .pipe(rename('app.js'))
+        .pipe(gulp.dest('public'));
+
+})
+
+gulp.task('default', ['styles', 'assets', 'scripts'])
