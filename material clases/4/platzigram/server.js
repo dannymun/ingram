@@ -15,6 +15,14 @@ app.get('/', function(req, res) {
     res.render('index');
 })
 
+app.get('/signup', function(req, res) {
+    res.render('index');
+})
+
+app.get('/signin', function(req, res) {
+    res.render('index');
+})
+
 // app listen tiene por parametro el puerto (3000) luego la function pasa parametro err
 app.listen(3000, function(err) {
     if (err) return console.log('hubo un error'), process.exit(1);
