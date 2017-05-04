@@ -2483,6 +2483,29 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],14:[function(require,module,exports){
+
+var orig = document.title;
+
+exports = module.exports = set;
+
+function set(str) {
+  var i = 1;
+  var args = arguments;
+  document.title = str.replace(/%[os]/g, function(_){
+    switch (_) {
+      case '%o':
+        return orig;
+      case '%s':
+        return args[i++];
+    }
+  });
+}
+
+exports.reset = function(){
+  set(orig);
+};
+
+},{}],15:[function(require,module,exports){
 var bel = require('bel') // turns template tag into DOM elements
 var morphdom = require('morphdom') // efficiently diffs + morphs two DOM elements
 var defaultEvents = require('./update-events.js') // default events to be copied when dom elements update
@@ -2526,7 +2549,7 @@ module.exports.update = function (fromNode, toNode, opts) {
   }
 }
 
-},{"./update-events.js":15,"bel":1,"morphdom":9}],15:[function(require,module,exports){
+},{"./update-events.js":16,"bel":1,"morphdom":9}],16:[function(require,module,exports){
 module.exports = [
   // attribute events (can be set with attributes)
   'onclick',
@@ -2564,26 +2587,99 @@ module.exports = [
   'onfocusout'
 ]
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var page = require('page');
-var yo = require('yo-yo');
-var empty = require('empty-element');
-
-var main = document.getElementById('main-container');
 
 page('/', function () {
+    var main = document.getElementById('main-container');
     main.innerHTML = '<a href="/signup">signup</a>';
 });
 
-page('/signup', function () {
-    var el = yo`<div class="container">
+},{"page":11}],18:[function(require,module,exports){
+var page = require('page');
+require('./homepage');
+require('./signup');
+require('./signin');
+page();
+
+},{"./homepage":17,"./signin":20,"./signup":22,"page":11}],19:[function(require,module,exports){
+var yo = require('yo-yo');
+module.exports = function landing(box) {
+    return yo`<div class="container">
             <div class="row">
                 <div class="col s10 push-s1">
                     <div class="row">
                         <div class="col m5 hide-on-small-only">
                             <img class="iphone" src="iphone.png" alt="">
                         </div>
-                        <div class="col s12 m7">
+						${box}
+                    </div>
+                </div>
+            </div>
+        </div>`;
+};
+
+},{"yo-yo":15}],20:[function(require,module,exports){
+var page = require('page');
+var empty = require('empty-element');
+var template = require('./template');
+var title = require('title');
+
+page('/signin', function () {
+    title('ingram -signin');
+    var main = document.getElementById('main-container');
+    empty(main).appendChild(template);
+});
+
+},{"./template":21,"empty-element":3,"page":11,"title":14}],21:[function(require,module,exports){
+var yo = require('yo-yo');
+var landing = require('../landing');
+
+var signinForm = yo`<div class="col s12 m7">
+                            <div class="row">
+                                <div class="signup-box">
+                                    <h1 class="ingram">Ingram</h1>
+                                    <form action="" class="signup-form">
+                                        <div class="section">
+                                            <a href="" class="btn btn-fb hide-on-small-only">iniciar sesion con facebook</a>
+                                            <a href="" class="btn btn-fb hide-on-med-and-up">iniciar sesion</a>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="section">
+                                            <input type="text" name="username" placeholder="Nombre de usuario"/>
+                                            <input type="password" name="password" placeholder="Contraseña"/>
+                                            <button class="btn waves-effect waves-light btn-signup" type="submit">Inicia Sesión</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="login-box">
+                                    ¿No tienes una cuenta? <a href="/signup">Registrate</a>
+                                </div>
+                            </div>
+                        </div>`;
+
+module.exports = landing(signinForm);
+
+},{"../landing":19,"yo-yo":15}],22:[function(require,module,exports){
+var page = require('page');
+var empty = require('empty-element');
+var template = require('./template');
+var title = require('title');
+
+page('/signup', function () {
+    title('ingram -signup');
+    var main = document.getElementById('main-container');
+    empty(main).appendChild(template);
+});
+
+},{"./template":23,"empty-element":3,"page":11,"title":14}],23:[function(require,module,exports){
+var yo = require('yo-yo');
+var landing = require('../landing');
+
+var signupForm = yo`<div class="col s12 m7">
                             <div class="row">
                                 <div class="signup-box">
                                     <h1 class="ingram">Ingram</h1>
@@ -2610,15 +2706,8 @@ page('/signup', function () {
                                     ¿tienes una cuenta? <a href="/signin">Entrar</a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+                        </div>`;
 
-    empty(main).appendChild(el);
-});
+module.exports = landing(signupForm);
 
-page();
-
-},{"empty-element":3,"page":11,"yo-yo":14}]},{},[16]);
+},{"../landing":19,"yo-yo":15}]},{},[18]);

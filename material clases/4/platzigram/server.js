@@ -12,15 +12,15 @@ app.use(express.static('public'))
 
 // app get ejecuta la ruta req = require Y res = response se usa res.send para enviar un mensaje
 app.get('/', function(req, res) {
-    res.render('index');
+    res.render('index', { title: 'ingram' });
 })
 
 app.get('/signup', function(req, res) {
-    res.render('index');
+    res.render('index', { title: 'ingram - signup' });
 })
 
 app.get('/signin', function(req, res) {
-    res.render('index');
+    res.render('index', { title: 'ingram - signin' });
 })
 
 // app listen tiene por parametro el puerto (3000) luego la function pasa parametro err

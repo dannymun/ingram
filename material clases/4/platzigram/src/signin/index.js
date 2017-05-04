@@ -3,9 +3,8 @@ var empty = require('empty-element')
 var template = require('./template')
 var title = require('title')
 
-
-page('/signup', function() {
-    title('ingram -signup')
+page('/signin', function() {
+    title('ingram -signin')
     var main = document.getElementById('main-container')
     empty(main).appendChild(template);
 })
