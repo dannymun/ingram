@@ -2,7 +2,7 @@ var yo = require('yo-yo');
 var landing = require('../landing');
 var translate = require('../translate');
 
-var signupForm = yo `<div class="col s12 m7">
+var signupForm = yo`<div class="col s12 m7">
   <div class="row">
     <div class="signup-box">
       <h1 class="platzigram">Platzigram</h1>
@@ -25,7 +25,7 @@ var signupForm = yo `<div class="col s12 m7">
   </div>
   <div class="row">
     <div class="login-box">
-      ${translate.message('signin.have-account')} <a href="/signin"> ${translate.message('signin')} </a>
+      ${translate.message('signup.have-account')} <a href="/signin">${translate.message('signin')}</a>
     </div>
   </div>
 </div>`;

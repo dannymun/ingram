@@ -2,32 +2,59 @@ var page = require('page');
 var empty = require('empty-element');
 var template = require('./template');
 var title = require('title');
+var request = require('superagent');
+var header = require('../header');
+var axios = require('axios');
 
-page('/', function(ctx, next) {
-    title('Platzigram');
-    var main = document.getElementById('main-container');
+page('/', header, asyncLoad, function (ctx, next) {
+  title('Platzigram');
+  var main = document.getElementById('main-container');
 
-    var pictures = [{
-            user: {
-                username: 'Danny',
-                avatar: 'https://fb-s-c-a.akamaihd.net/h-ak-xtl1/v/t1.0-9/16807097_405384326476179_258405160304733262_n.jpg?oh=e892b2440b21fa630cb030836b6e2317&oe=59866172&__gda__=1501310787_1d58f047d528192befebbfcf259f9c0b'
-            },
-            url: 'office.jpg',
-            likes: 0,
-            liked: false,
-            createdAt: new Date()
-        },
-        {
-            user: {
-                username: 'Danna',
-                avatar: 'https://fb-s-c-a.akamaihd.net/h-ak-xtl1/v/t1.0-9/16807097_405384326476179_258405160304733262_n.jpg?oh=e892b2440b21fa630cb030836b6e2317&oe=59866172&__gda__=1501310787_1d58f047d528192befebbfcf259f9c0b'
-            },
-            url: 'office.jpg',
-            likes: 1,
-            liked: true,
-            createdAt: new Date().setDate(new Date().getDate() - 10)
-        }
-    ];
-
-    empty(main).appendChild(template(pictures));
+  empty(main).appendChild(template(ctx.pictures));
 })
+
+function loadPictures(ctx, next) {
+  request
+    .get('/api/pictures')
+    .end(function (err, res) {
+      if (err) return console.log(err);
+
+      ctx.pictures = res.body;
+      next();
+    })
+}
+
+function loadPicturesAxios(ctx, next) {
+  axios
+    .get('/api/pictures')
+    .then(function (res) {
+      ctx.pictures = res.data;
+      next();
+    })
+    .catch(function (err) {
+      console.log(err);
+    })
+}
+
+function loadPicturesFetch(ctx, next) {
+  fetch('/api/pictures')
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (pictures) {
+      ctx.pictures = pictures;
+      next();
+    })
+    .catch(function (err) {
+      console.log(err);
+    })
+}
+
+async function asyncLoad(ctx, next) {
+  try {
+    ctx.pictures = await fetch('/api/pictures').then(res => res.json());
+    next();
+  } catch (err) {
+    return console.log(err);
+  }
+}
